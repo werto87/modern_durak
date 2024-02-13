@@ -1,17 +1,3 @@
 # modern-durak
-
-## Install / Setup
-- Download the repository
-- Fill out .env file
-
-In the 00_nginx.conf file please replace "modern-durak.com" with your domain
-
-## Run the app
-docker-compose down --volumes  && docker-compose pull  && docker-compose up  
-Go to your domain you should now get the client served.
-
-
-make certificate   
-``
-mkcert -install ; mkcert localhost
-``
+- run development on your local machine for bug fixing and testing
+- run production on the production server to deploy the app
