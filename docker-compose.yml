@@ -1,28 +1,62 @@
 volumes:
   dataToHost:
+  nginx_secrets:
+
 
 services:
+  client:
+    image: ghcr.io/werto87/modern_durak_client/modern-durak-client:latest
+    volumes:
+      - dataToHost:/client
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1000m"
+  matchmaking:
+    image: ghcr.io/werto87/matchmaking_proxy/matchmaking_proxy:latest
+    ports:
+      - ${PORT_USER}:${PORT_USER}
+      - ${PORT_GAME_TO_MATCHMAKING}:${PORT_GAME_TO_MATCHMAKING}
+    volumes:
+      - nginx_secrets:/etc/letsencrypt
+      - ${DATABASE_FOLDER}:/database
+    restart: always
+    command: /home/build_user/matchmacking_proxy/matchmaking_proxy --port-user ${PORT_USER} --port-matchmaking-to-game ${PORT_MATCHMAKING_TO_GAME} --port-user-to-game-via-matchmaking ${PORT_USER_TO_GAME_VIA_MATCHMAKING} --port-game-to-matchmaking ${PORT_GAME_TO_MATCHMAKING} --path-to-chain-file ${PATH_TO_CHAIN_FILE} --path-to-private-file ${PATH_TO_PRIVATE_FILE} --path-to-dh-file ${PATH_TO_DH_FILE} --secrets-polling-sleep-time-seconds ${SECRETS_POLLING_SLEEP_TIMER_SECONDS} --address-of-game ${ADDRESS_OF_GAME}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1000m"
 
-    client:
-        image: ghcr.io/werto87/game_01_client/modern-durak-client
-        volumes:
-            - dataToHost:/client
-        command: sh -c "sed -i  's;{{WEBSOCKET-URL}};${WEBSOCKET_URL};' /client/project.html"
-    server:
-        image: ghcr.io/werto87/game_01_server/modern-durak-server
-        ports:
-         - 55555:55555
-        volumes:
-         - ${SECRETS_FOLDER}:/secrets
-         - ${DATABASE_FOLDER}:/database
-        restart: always 
-    nginx: 
-        image: nginx:latest
-        volumes:
-          - ${NGINX_CONFIG_FILE}:/etc/nginx/nginx.conf
-          - ${SECRETS_FOLDER}:/secrets
-          - dataToHost:/client    
-        ports:
-            - 80:80
-            - 443:443
-        restart: always
+  game:
+    image: ghcr.io/werto87/example_of_a_game_server/example_of_a_game_server:latest
+    ports:
+      - ${PORT_USER_TO_GAME_VIA_MATCHMAKING}:${PORT_USER_TO_GAME_VIA_MATCHMAKING}
+      - ${PORT_MATCHMAKING_TO_GAME}:${PORT_MATCHMAKING_TO_GAME}
+    volumes:
+      - nginx_secrets:/etc/letsencrypt
+    restart: always
+    command: /home/build_user/example_of_a_game_server/example_of_a_game_server --port-user-to-game-via-matchmaking ${PORT_USER_TO_GAME_VIA_MATCHMAKING} --port-matchmaking-to-game ${PORT_MATCHMAKING_TO_GAME} --port-game-to-matchmaking ${PORT_GAME_TO_MATCHMAKING} --address-of-matchmaking ${ADDRESS_OF_MATCHMAKING} --path-to-database ${COMBINATION_DATABASE_PATH}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1000m"
+
+  nginx:
+    image: jonasal/nginx-certbot:latest
+    restart: unless-stopped
+    environment:
+      - CERTBOT_EMAIL=${CERTBOT_EMAIL}
+      - STAGING=${STAGING}
+      - DEBUG=${DEBUG}
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - dataToHost:/client
+      - nginx_secrets:/etc/letsencrypt
+      - ./user_conf.d:/etc/nginx/user_conf.d
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1000m"
