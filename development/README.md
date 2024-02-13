@@ -5,4 +5,4 @@
 
 ## Run the app
 - docker-compose down --volumes  && docker-compose pull  && docker-compose up  
-- Go to your domain you should now get the client served.
+- Go to "https://localhost/"
