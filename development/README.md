@@ -5,4 +5,4 @@
 
 ## Run the app
 - docker-compose down --volumes  && docker-compose pull  && docker-compose up  
-- Go to "https://localhost/"
+- Go to "https://localhost/" 
