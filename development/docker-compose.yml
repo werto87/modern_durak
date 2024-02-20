@@ -1,12 +1,12 @@
 volumes:
   dataToHost:
   nginx_secrets:
-  dev_ca:
 
 
 services:
   client:
     image: ghcr.io/werto87/modern_durak_client/modern-durak-client:latest
+#    image: modern_durak_client_local
     volumes:
       - dataToHost:/client
     logging:
@@ -15,6 +15,7 @@ services:
         max-size: "1000m"
   matchmaking:
     image: ghcr.io/werto87/matchmaking_proxy/matchmaking_proxy:latest
+#    image: matchmaking_proxy_local
     ports:
       - ${PORT_USER}:${PORT_USER}
       - ${PORT_GAME_TO_MATCHMAKING}:${PORT_GAME_TO_MATCHMAKING}
@@ -60,7 +61,7 @@ services:
       - nginx_secrets:/etc/letsencrypt
       - ./user_conf.d:/etc/nginx/user_conf.d
       - ./nginx.conf:/etc/nginx/nginx.conf
-
+      - ${PATH_TO_CERT}:/home/build_user/cert
     logging:
       driver: "json-file"
       options:
