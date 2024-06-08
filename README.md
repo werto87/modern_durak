@@ -1,7 +1,7 @@
 # modern-durak project
 ## modern-durak Project page
 ### what is modern durak
-Modern durak models the russian card game [durak](https://en.wikipedia.org/wiki/Durak). Durak is russian and means fool. The name modern durak is a joke combining 'modern' from modern c++ and 'durak' from the game durak. You can play online against other players (quick game, ranked game) or play against a computer controlled opponent (puzzle).
+Modern durak models the russian card game [durak](https://en.wikipedia.org/wiki/Durak). Durak is russian and means fool. The name modern durak is a joke combining 'modern' from modern c++ and 'durak' from the game durak. You can play online against other players (quick game, ranked game) or play against a computer controlled opponent (puzzle). I am self hosting the game [here](modern-durak.com).
 ### how to deploy
 - run development on your local machine for bug fixing and testing ([development deployment guide](https://github.com/werto87/modern_durak/blob/main/development/README.md))
 - run production on the production server to deploy the app ([production deployment guide](https://github.com/werto87/modern_durak/blob/main/production/README.md))
