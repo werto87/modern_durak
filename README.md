@@ -12,10 +12,10 @@ Modern durak is made from 3 projects:
 Web ui communicates with the backend.
 ### Backend 
 The backend is made from 2 projects.
-#### [login matchmaking proxy](https://github.com/werto87/matchmaking_proxy)
-Reusable login matchmaking proxy connects to game, starts a game
+#### [modern_durak_matchmaking_proxy](https://github.com/werto87/modern_durak_matchmaking_proxy)
+Login matchmaking proxy connects to game, starts a game
 and than forwards all messages from ui to game and vice versa. Has support for ranked play, login, relog and send message to user.
-#### [game](https://github.com/werto87/example_of_a_game_server)
+#### [modern_durak_game](https://github.com/werto87/modern_durak_game)
 Game contains the logic for the actual game. Allows to play against other players or the computer controlled opponent.
 ### transitive dependencies made by me
 #### [durak_computer_controlled_opponent](https://github.com/werto87/durak_computer_controlled_opponent)
