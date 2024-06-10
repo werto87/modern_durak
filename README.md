@@ -14,7 +14,7 @@ Web ui communicates with the backend.
 The backend is made from 2 projects.
 #### [modern_durak_matchmaking_proxy](https://github.com/werto87/modern_durak_matchmaking_proxy)
 Login matchmaking proxy connects to game, starts a game
-and than forwards all messages from ui to game and vice versa. Has support for ranked play, login, relog and send message to user.
+and then forwards all messages from ui to game and vice versa. Has support for ranked play, login, relog and send message to user.
 #### [modern_durak_game](https://github.com/werto87/modern_durak_game)
 Game contains the logic for the actual game. Allows to play against other players or the computer controlled opponent.
 ### transitive dependencies made by me
