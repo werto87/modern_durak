@@ -21,7 +21,7 @@ Game contains the logic for the actual game. Allows to play against other player
 #### [durak_computer_controlled_opponent](https://github.com/werto87/durak_computer_controlled_opponent)
 Simulates the game durak and creates a lookup tree with the results.
 #### [small_memory_tree](https://github.com/werto87/small_memory_tree)
-Changes representation from trees to save memory and to store them easily into an database.
+Changes representation from trees to save memory and to store them easily into a database.
 #### [durak](https://github.com/werto87/durak)
 Rules for the card game durak.
 #### [confu_json](https://github.com/werto87/confu_json)
