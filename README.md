@@ -1,11 +1,11 @@
-# modern-durak project
-## modern-durak Project page
-### what is modern durak
-Modern durak models the russian card game [durak](https://en.wikipedia.org/wiki/Durak). Durak is russian and means fool. The name modern durak is a joke combining 'modern' from modern c++ and 'durak' from the game durak. You can play online against other players (quick game, ranked game) or play against a computer controlled opponent (puzzle). I am self hosting the game [here](https://modern-durak.com). Feel free to create an issue if something is not working or you have a question.
-### how to deploy
+# Modern Durak Project
+## Modern Durak Project Page
+### What is Modern Durak
+Modern Durak models the russian card game [Durak](https://en.wikipedia.org/wiki/Durak). Durak is russian and means fool. The name Modern Durak is a joke combining 'modern' from modern c++ and 'durak' from the game Durak. You can play online against other players (quick game, ranked game) or play against a computer controlled opponent (puzzle). I am self hosting the game [here](https://modern-durak.com). Feel free to create an issue if something is not working or you have a question.
+### How to deploy
 - run development on your local machine for bug fixing and testing ([development deployment guide](https://github.com/werto87/modern_durak/blob/main/development/README.md))
 - run production on the production server to deploy the app ([production deployment guide](https://github.com/werto87/modern_durak/blob/main/production/README.md))
-## project structure
+## Project Structure
 Modern durak is made from 3 projects:
 ### Frontend  
 #### [Ui](https://github.com/werto87/modern_durak_client) 
@@ -38,25 +38,25 @@ Used for enum printing.
 #### [soci](https://github.com/SOCI/soci)
 Used for database access.
 ## Tools and technologies used in this project
-### compiler
+### Compiler
 clang++ and g++.
-### build system
+### Build System
 CMake
-### dependency manager
+### Dependency Manager
 conan
-### artifactory
+### Artifactory
 jfrog artifactory
 ### version control
 git
-### ci
+### Ci
 Git hub actions
-### container and deployment
+### Container and Deployment
 Docker
-### web server
+### Web Server
 Nginx
-### web hosting
+### Web Hosting
 netcup virtual server
-### os
+### Os
 arch linux
-### tls certificate
+### Tls Certificate
 Let's Encrypt
