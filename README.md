@@ -32,7 +32,7 @@ Generates boilerplate for the database access library soci.
 #### [boost](https://github.com/boostorg/boost)
 Basically all my projects depend on boost. Especially asio and beast for networking, json for json parsing, mpl and fusion for template programming.
 #### [boost::ext::sml](https://github.com/boost-ext/sml)
-The business logic in the two backend applications is modeled using a state machines from sml. This library allows to describe the state machine using a dsl and also to generate uml diagrams without writing extra code.
+The business logic in the two backend applications is modeled using state machines from sml. This library allows to describe the state machine using a dsl and also to generate uml diagrams without writing extra code.
 #### [magic enum](https://github.com/Neargye/magic_enum)
 Used for enum printing.
 #### [soci](https://github.com/SOCI/soci)
