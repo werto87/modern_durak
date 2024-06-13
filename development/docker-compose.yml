@@ -5,8 +5,10 @@ volumes:
 
 services:
   client:
-    image: ghcr.io/werto87/modern_durak_client/modern-durak-client-localhost-55555:latest
-    #    image: modern_durak_client_local
+    # image: ghcr.io/werto87/modern_durak_client/modern-durak-client-modern-durak:latest 
+    build:
+      dockerfile: Dockerfile-localhost-55555
+      context: subrepos/modern_durak_client
     volumes:
       - dataToHost:/client
     logging:
@@ -14,10 +16,10 @@ services:
       options:
         max-size: "1000m"
   matchmaking:
-    # TODO add the 3 projects as links so they can get checked out with development and we can do the wiring
-    # TODO change this to use local docker images build by docker compose
     # image: ghcr.io/werto87/modern_durak_matchmaking_proxy/modern_durak_matchmaking_proxy:latest
-    image: docker.io/library/modern_durak_matchmaking_proxy_local:latest
+    build:
+      dockerfile: Dockerfile
+      context: subrepos/modern_durak_matchmaking_proxy
     ports:
       - ${PORT_USER}:${PORT_USER}
       - ${PORT_GAME_TO_MATCHMAKING}:${PORT_GAME_TO_MATCHMAKING}
@@ -33,7 +35,10 @@ services:
         max-size: "1000m"
 
   game:
-    image: ghcr.io/werto87/modern_durak_game/modern_durak_game:latest
+    # image: ghcr.io/werto87/modern_durak_game/modern_durak_game:latest
+    build:
+      dockerfile: Dockerfile
+      context: subrepos/modern_durak_game
     ports:
       - ${PORT_USER_TO_GAME_VIA_MATCHMAKING}:${PORT_USER_TO_GAME_VIA_MATCHMAKING}
       - ${PORT_MATCHMAKING_TO_GAME}:${PORT_MATCHMAKING_TO_GAME}
