@@ -1,9 +1,0 @@
-[submodule "development/submodule/modern_durak_game"]
-	path = development/submodule/modern_durak_game
-	url = https://github.com/werto87/modern_durak_game.git
-[submodule "development/submodule/modern_durak_client"]
-	path = development/submodule/modern_durak_client
-	url = https://github.com/werto87/modern_durak_client.git
-[submodule "development/submodule/modern_durak_matchmaking_proxy"]
-	path = development/submodule/modern_durak_matchmaking_proxy
-	url = https://github.com/werto87/modern_durak_matchmaking_proxy.git
