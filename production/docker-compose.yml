@@ -28,14 +28,14 @@ services:
         max-size: "1000m"
 
   game:
-    image: ghcr.io/werto87/example_of_a_game_server/example_of_a_game_server:latest
+    image: ghcr.io/werto87/modern_durak_game/modern_durak_game:latest
     ports:
       - ${PORT_USER_TO_GAME_VIA_MATCHMAKING}:${PORT_USER_TO_GAME_VIA_MATCHMAKING}
       - ${PORT_MATCHMAKING_TO_GAME}:${PORT_MATCHMAKING_TO_GAME}
     volumes:
       - nginx_secrets:/etc/letsencrypt
     restart: always
-    command: /home/build_user/example_of_a_game_server/example_of_a_game_server --port-user-to-game-via-matchmaking ${PORT_USER_TO_GAME_VIA_MATCHMAKING} --port-matchmaking-to-game ${PORT_MATCHMAKING_TO_GAME} --port-game-to-matchmaking ${PORT_GAME_TO_MATCHMAKING} --address-of-matchmaking ${ADDRESS_OF_MATCHMAKING} --path-to-database ${COMBINATION_DATABASE_PATH}
+    command: /home/build_user/modern_durak_game/modern_durak_game --port-user-to-game-via-matchmaking ${PORT_USER_TO_GAME_VIA_MATCHMAKING} --port-matchmaking-to-game ${PORT_MATCHMAKING_TO_GAME} --port-game-to-matchmaking ${PORT_GAME_TO_MATCHMAKING} --address-of-matchmaking ${ADDRESS_OF_MATCHMAKING} --path-to-database ${COMBINATION_DATABASE_PATH}
     logging:
       driver: "json-file"
       options:
