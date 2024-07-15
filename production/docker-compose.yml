@@ -1,0 +1,62 @@
+volumes:
+  dataToHost:
+  nginx_secrets:
+
+
+services:
+  client:
+    image: ghcr.io/werto87/modern_durak_client/modern-durak-client-modern-durak:latest
+    volumes:
+      - dataToHost:/client
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1000m"
+  matchmaking:
+    image: ghcr.io/werto87/modern_durak_matchmaking_proxy/modern_durak_matchmaking_proxy:latest
+    ports:
+      - ${PORT_USER}:${PORT_USER}
+      - ${PORT_GAME_TO_MATCHMAKING}:${PORT_GAME_TO_MATCHMAKING}
+    volumes:
+      - nginx_secrets:/etc/letsencrypt
+      - ${DATABASE_FOLDER}:/database
+    restart: always
+    command: /home/build_user/modern_durak_matchmaking_proxy/modern_durak_matchmaking_proxy --port-user ${PORT_USER} --port-matchmaking-to-game ${PORT_MATCHMAKING_TO_GAME} --port-user-to-game-via-matchmaking ${PORT_USER_TO_GAME_VIA_MATCHMAKING} --port-game-to-matchmaking ${PORT_GAME_TO_MATCHMAKING} --path-to-chain-file ${PATH_TO_CHAIN_FILE} --path-to-private-file ${PATH_TO_PRIVATE_FILE} --path-to-dh-file /etc/letsencrypt/dhparams/dhparam.pem --secrets-polling-sleep-time-seconds ${SECRETS_POLLING_SLEEP_TIMER_SECONDS} --address-of-game ${ADDRESS_OF_GAME}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1000m"
+
+  game:
+    image: ghcr.io/werto87/modern_durak_game/modern_durak_game:latest
+    ports:
+      - ${PORT_USER_TO_GAME_VIA_MATCHMAKING}:${PORT_USER_TO_GAME_VIA_MATCHMAKING}
+      - ${PORT_MATCHMAKING_TO_GAME}:${PORT_MATCHMAKING_TO_GAME}
+    volumes:
+      - nginx_secrets:/etc/letsencrypt
+    restart: always
+    command: /home/build_user/modern_durak_game/modern_durak_game --port-user-to-game-via-matchmaking ${PORT_USER_TO_GAME_VIA_MATCHMAKING} --port-matchmaking-to-game ${PORT_MATCHMAKING_TO_GAME} --port-game-to-matchmaking ${PORT_GAME_TO_MATCHMAKING} --address-of-matchmaking ${ADDRESS_OF_MATCHMAKING}   --path-to-database ${COMBINATION_DATABASE_PATH}
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1000m"
+
+  nginx:
+    image: jonasal/nginx-certbot:latest
+    restart: unless-stopped
+    environment:
+      - CERTBOT_EMAIL=${CERTBOT_EMAIL}
+      - STAGING=${STAGING}
+      - DEBUG=${DEBUG}
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - dataToHost:/client
+      - nginx_secrets:/etc/letsencrypt
+      - ./user_conf.d:/etc/nginx/user_conf.d
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1000m"
