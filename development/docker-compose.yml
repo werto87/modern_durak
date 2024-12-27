@@ -5,7 +5,7 @@ volumes:
 
 services:
   client:
-    # image: ghcr.io/werto87/modern_durak_client/modern-durak-client-modern-durak:latest 
+    image: ghcr.io/werto87/modern_durak_client/modern-durak-client-modern-durak:latest
     build:
       dockerfile: Dockerfile-localhost-55555
       context: submodule/modern_durak_client
@@ -16,7 +16,7 @@ services:
       options:
         max-size: "1000m"
   matchmaking:
-    # image: ghcr.io/werto87/modern_durak_matchmaking_proxy/modern_durak_matchmaking_proxy:latest
+    image: ghcr.io/werto87/modern_durak_matchmaking_proxy/modern_durak_matchmaking_proxy:latest
     build:
       dockerfile: Dockerfile
       context: submodule/modern_durak_matchmaking_proxy
@@ -35,7 +35,7 @@ services:
         max-size: "1000m"
 
   game:
-    # image: ghcr.io/werto87/modern_durak_game/modern_durak_game:latest
+    image: ghcr.io/werto87/modern_durak_game/modern_durak_game:latest
     build:
       dockerfile: Dockerfile
       context: submodule/modern_durak_game
