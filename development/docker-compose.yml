@@ -6,14 +6,17 @@ volumes:
 services:
   client:
     image: ghcr.io/werto87/modern_durak_client/modern-durak-client-modern-durak:latest
+    pull_policy: always
     volumes:
       - dataToHost:/client
     logging:
       driver: "json-file"
       options:
         max-size: "1000m"
+
   matchmaking:
     image: ghcr.io/werto87/modern_durak_matchmaking_proxy/modern_durak_matchmaking_proxy:latest
+    pull_policy: always
     ports:
       - ${PORT_USER}:${PORT_USER}
       - ${PORT_GAME_TO_MATCHMAKING}:${PORT_GAME_TO_MATCHMAKING}
@@ -30,6 +33,7 @@ services:
 
   game:
     image: ghcr.io/werto87/modern_durak_game/modern_durak_game:latest
+    pull_policy: always
     ports:
       - ${PORT_USER_TO_GAME_VIA_MATCHMAKING}:${PORT_USER_TO_GAME_VIA_MATCHMAKING}
       - ${PORT_MATCHMAKING_TO_GAME}:${PORT_MATCHMAKING_TO_GAME}
@@ -45,6 +49,7 @@ services:
 
   nginx:
     image: jonasal/nginx-certbot:latest
+    pull_policy: always
     restart: unless-stopped
     environment:
       - CERTBOT_EMAIL=${CERTBOT_EMAIL}
