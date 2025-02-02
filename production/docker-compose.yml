@@ -12,7 +12,7 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "1000m"
+        max-size: "10m"
   matchmaking:
     image: ghcr.io/werto87/modern_durak_matchmaking_proxy/modern_durak_matchmaking_proxy:latest
     pull_policy: always
@@ -27,7 +27,7 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "1000m"
+        max-size: "10m"
 
   game:
     image: ghcr.io/werto87/modern_durak_game/modern_durak_game:latest
@@ -42,7 +42,7 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "1000m"
+        max-size: "10m"
 
   nginx:
     image: jonasal/nginx-certbot:latest
@@ -63,4 +63,4 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "1000m"
+        max-size: "10m"
