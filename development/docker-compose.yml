@@ -25,7 +25,7 @@ services:
       - ${DATABASE_FOLDER}:/database
       - ${PATH_TO_CERT}:/home/build_user/cert
     restart: always
-    command: /home/build_user/modern_durak_matchmaking_proxy/modern_durak_matchmaking_proxy --port-user ${PORT_USER} --port-matchmaking-to-game ${PORT_MATCHMAKING_TO_GAME} --port-user-to-game-via-matchmaking ${PORT_USER_TO_GAME_VIA_MATCHMAKING} --port-game-to-matchmaking ${PORT_GAME_TO_MATCHMAKING} --path-to-chain-file ${PATH_TO_CHAIN_FILE} --path-to-private-file ${PATH_TO_PRIVATE_FILE} --path-to-dh-file /etc/letsencrypt/dhparams/dhparam.pem --secrets-polling-sleep-time-seconds ${SECRETS_POLLING_SLEEP_TIMER_SECONDS} --address-of-game ${ADDRESS_OF_GAME}
+    command: /home/build_user/modern_durak_matchmaking_proxy/modern_durak_matchmaking_proxy --port-user ${PORT_USER} --port-matchmaking-to-game ${PORT_MATCHMAKING_TO_GAME} --port-user-to-game-via-matchmaking ${PORT_USER_TO_GAME_VIA_MATCHMAKING} --port-game-to-matchmaking ${PORT_GAME_TO_MATCHMAKING} --path-to-chain-file ${PATH_TO_CHAIN_FILE} --path-to-private-file ${PATH_TO_PRIVATE_FILE} --path-to-dh-file /etc/letsencrypt/dhparams/dhparam.pem --secrets-polling-sleep-time-seconds ${SECRETS_POLLING_SLEEP_TIMER_SECONDS} --address-of-game ${ADDRESS_OF_GAME} --path-to-database ${MATCHMAKING_DATABASE_PATH}
     logging:
       driver: "json-file"
       options:
